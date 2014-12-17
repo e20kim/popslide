@@ -1,0 +1,20 @@
+.slider{
+	width: 100%; 
+	position: relative;
+	padding-top:60%; 
+	overflow:hidden; 
+}
+
+.slider >ul{
+    position: relative; 
+    -webkit-transition: 0.5s left;
+    -moz-transition: 0.5s left;
+    -ms-transition: 0.5s left;
+    -o-transition: 0.5s left;
+    
+}
+.slider > ul> li{
+    float:left; 
+    width: 400px;
+    height: 650px; 
+}
