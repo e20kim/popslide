@@ -1,11 +1,19 @@
-.slider{
+#slider{
 	width: 100%; 
 	position: relative;
 	padding-top:60%; 
 	overflow:hidden; 
 }
+#slider .wrapper {
 
-.slider >ul{
+    display: block; 
+    width: 700px;
+    height: 400px; 
+    margin: 0; 
+    padding: 0;
+}
+
+#slider  .wrapper > ul{
     position: relative; 
     -webkit-transition: 0.5s left;
     -moz-transition: 0.5s left;
@@ -13,7 +21,7 @@
     -o-transition: 0.5s left;
     
 }
-.slider > ul> li{
+#slider .wrapper > ul> li{
     float:left; 
     width: 400px;
     height: 650px; 
