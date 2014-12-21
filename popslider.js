@@ -4,6 +4,7 @@
 */
 /* 
     VARAIABLES DEFINED: 
+     -----Setting------
     width -- width of the slider 
     animinateSpeed --setter for animination 
     pauseonHover --- when mouse hovers over slider, stops animination and setInterval 
@@ -14,20 +15,22 @@
     
     JQUERY Functions:
     setInterval -- tell the browser how many milliseconds to show the next image 
+    startSlider() ---start the slide show 
 */
 
 
-//when the window is loaded 
-$(function(){
-   // var theImage = $('#slider .wrapper ul li img');
-    //setInterval 
-    
+/*wrap all code with jQuery document ready to make sure the script runs only after all the DOM 
+elements are loaded in the page */
+$(document).ready(function(){
+ 
+    //settings 
     var width = 700;
     var animinateSpeed = 1000; //1 second
     var pauseonHover = 3000; //3 seconds
+    
     var currentSlide = 1; //current slide start at slide 1 
     
-    
+    //cache DOM
     var $slider = $('#slider'); //find slider object
     var $sliderContainer = $slider.find('.wrapper ul'); 
     var $slideImages = $sliderContainer.find('li'); 
@@ -54,4 +57,6 @@ $(function(){
     }
         
     $slider.on('mouseenter', stopSlider).on('mouseleave',startSlider);
+    
+    startSlider(); //start the function 
 }); //end of window load 
