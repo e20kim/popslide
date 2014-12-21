@@ -26,7 +26,7 @@
 
 /*wrap all code with jQuery document ready to make sure the script runs only after all the DOM 
 elements are loaded in the page */
-$(document).ready(function(){
+$(function(){
  
     //settings 
     var width = 700;
@@ -38,7 +38,7 @@ $(document).ready(function(){
     //cache DOM
     var $slider = $('#slider'); //find slider object
     var $sliderContainer = $slider.find('.wrapper ul'); 
-    var $slideImages = $sliderContainer.find('li'); 
+    var $slideImages = $sliderContainer.find('li img'); 
     
     var interval; 
     
@@ -47,16 +47,14 @@ $(document).ready(function(){
     //set the image timer 
     function startSlider() {
    interval = setInterval(function(){
-        $sliderContainer.animate({'margin-left': '-=' + width},animinateSpeed function()({
-            currentSlide++; //increment slide 
-            if (currentSlide === $slideImages.length){
-                currentSlide = 1; 
-                $sliderContainer.css('margin-left' ,0); 
-            }
-        });
-        );}, pauseonHover);
-   
-   } 
+       $slideContainer.animate({'margin-left': '-='+width}, animationSpeed, function() {
+                if (++currentSlide === $slides.length) {
+                    currentSlide = 1;
+                    $slideContainer.css('margin-left', 0);
+                }
+            });
+        }, pause);
+    }
    function stopSlider() { 
         clearInterval(interval);    
     }
@@ -64,4 +62,4 @@ $(document).ready(function(){
     $slider.on('mouseenter', stopSlider).on('mouseleave',startSlider);
     
     startSlider(); //start the function 
-}) ; //end of  popslider 
+}) (jQuery) ; //end of  popslider 
