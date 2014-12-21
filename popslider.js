@@ -16,6 +16,11 @@
     JQUERY Functions:
     setInterval -- tell the browser how many milliseconds to show the next image 
     startSlider() ---start the slide show 
+    stopSlider() ---stop slideslow 
+    
+    TODO FUNCTIONS:
+    resize() --- resize all images 
+    
 */
 
 
@@ -37,8 +42,8 @@ $(document).ready(function(){
     
     var interval; 
     
-    
-    
+    //reize images varabiles 
+ /*-----------------------------------------------*/   
     //set the image timer 
     function startSlider() {
    interval = setInterval(function(){
@@ -59,4 +64,4 @@ $(document).ready(function(){
     $slider.on('mouseenter', stopSlider).on('mouseleave',startSlider);
     
     startSlider(); //start the function 
-}); //end of window load 
+}) ; //end of  popslider 
