@@ -1,18 +1,22 @@
 /** 
 FOR STUPID PEOPLE LIKE ME DOCUMENTATION: 
-
+this image slider is under MIT license. It is open source and we do not make profits off of it. 
+Image slider written by Esther Kim and Tiffany Tse 
+It is a image slider that was purposely designed for personal use and it is a personal project. 
+* 
 */
-(function($){
+'use strict';
+(function ($) {
     $.fn.extend({
-    popslider : function(options) { 
+      popslider : function(options) { 
         //set default values for plugin options
         //aka the constructor 
-        var default_settings = {
+         var default_settings = {
             interval: 5000, //5 secs 
             duration: 5000, //animation duration 
-            lineHeight: 1, 
+            lineHeight: 1, //line height 
             height: 'auto',
-            mousepause: false, 
+            mousepause:false, 
             page: true, 
             nav: true, //dont change this. 
             keyboardnav: true // keyboard nav using the arrows 
@@ -21,25 +25,46 @@ FOR STUPID PEOPLE LIKE ME DOCUMENTATION:
         var options = $.extend(default_settings, options); 
         
         //start the configuration of the slider 
-        return this.each(function() {
+         return this.each(function() {
             var settings = options; 
             var obj = $(this); //make object
             
             //store the slide and page 
             var slides = $('.slides li', obj);
-            var page = $('.page li,' obj); 
+            var page = $('.page li', obj); 
             
             //set inital current sldie and next slide values 
             var current = 0; 
-            var nextslide = current +1; 
+            var nextslide = current + 1; 
             
             //get height and width of inital slide image and calcuate the size ratio
             var imgHeight = slides.eq(current).find('img').height(); 
             var imgWidth = slides.eq(current).find('img').width(); 
-            var imgRatio = imgWidth/imgHeight; 
+            var imgRatio = imgWidth / imgHeight; 
+            
+            //variables for setimagesize function 
+            var sliderWidth = 0; 
+            var cropHeight =0; 
+            
+            //hide all slides, and use fade in method from jQuery  add active to slide 
+            slides.hide().eq(current).fadeIn(settings.duration).addClass('active'); 
+            
+            //build page containing slides if it does not exist and if enabled 
+            if (page.length) {
+                //make current slide ul > li active 
+                page.eq(current).addClass('active'); 
+            }
+            else if (settings.page){
+                obj.append('<ul class = "page"></ul>');
+                slides.each(function(index) {
+                  $('.page', obj).append('<li><a href="#"><span>' + index +   '</span></a></li>');
+                    
+                });//end of slides.each function 
+               page = $('.page li',obj); 
+               page.eq(current).addClass('active');
+            }
+        }); //end of return function 
         
-        }) //end of return function 
-        
-    }//end popslider function options 
-    }); //end of extend function 
+      }//end popslider function options 
+   }); //end of extend function 
 })(jQuery); //end of popslider 
