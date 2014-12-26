@@ -59,10 +59,46 @@ It is a image slider that was purposely designed for personal use and it is a pe
                 slides.each(function(index) {
                   $('.page', obj).append('<li><a href="#"><span>' + index +   '</span></a></li>');
                     
-                });//end of slides.each function 
+               });//end of slides.each function 
                page = $('.page li',obj); 
                page.eq(current).addClass('active');
             }
+            //click to rotate to the next slide 
+            if (page) {  
+               
+            } //end of 2nd if statement 
+            
+            /**
+            * FUNCTION: rotateSLIDES
+            * PURPOSE: change slides  --- the primary function 
+            */
+               var rotateSlides = function () { 
+ slides.eq(current).fadeOut(settings.duration).removeClass('active').end().eq(next).fadeIn(o.duration).addClass('active').queue(function(){
+                  //add rotateTimer function to end of animation queue
+                  //this prevents animation buildup caused by requestAnimationFrame
+                  //rotateTimer starts a timer for the next rotate
+                  rotateTimer();
+                  $(this).dequeue()
+                  });
+                  //update page 
+                  if(page) {
+                     page.eq(current).removeClass('active').end().eq(next).addClass('active');
+                  }
+                  current =nextslide; 
+                  nextslide = current >= slides.length-1 ? 0 : current +1;  
+               };
+            /**
+            * FUNCTION: rotateTimer 
+               PURPOSE: set the time to chance the slides. the real action happens here for timing 
+            */
+            var rotateTimer = function (){
+                  //if mouse overs over slider STOP
+                  obj.play = setTimeout(function(){ 
+                              rotate();
+                              },settings.interval);
+                  };
+               rotateTimer();
+          
         }); //end of return function 
         
       }//end popslider function options 
