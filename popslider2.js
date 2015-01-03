@@ -65,7 +65,12 @@ It is a image slider that was purposely designed for personal use and it is a pe
             }
             //click to rotate to the next slide 
             if (page) {  
-               
+               $('a' , page).click(function((){
+                  clearTimeout(obj.play);
+                  next = $(this).parent().index(); 
+                  rotateSlides();
+                  return false; 
+               });
             } //end of 2nd if statement 
             
             /**
@@ -97,6 +102,7 @@ It is a image slider that was purposely designed for personal use and it is a pe
                               rotate();
                               },settings.interval);
                   };
+            //start the timer for the first time
                rotateTimer();
           
         }); //end of return function 
