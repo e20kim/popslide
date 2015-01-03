@@ -104,7 +104,58 @@ It is a image slider that was purposely designed for personal use and it is a pe
                   };
             //start the timer for the first time
                rotateTimer();
-          
+            					//pause the slider on hover
+				
+            //disabled by default due to bug
+				if(o.hoverpause){
+					slides.hover(function(){
+						//stop the timer in mousein
+						clearTimeout(obj.play);
+					}, function(){
+						//start the timer on mouseout
+						rotateTimer();
+					});
+				}
+	//calculate and set height based on image width/height ratio and specified line height		
+				var setsize = function(){
+					sliderWidth = $('.slides', obj).width();
+					cropHeight = Math.floor(((sliderWidth/imgRatio)/o.lineheight))*o.lineheight;
+
+					$('.slides', obj).css({height: cropHeight});
+				};
+				setsize();
+
+				//bind setsize function to window resize event
+				$(window).resize(function(){
+					setsize();
+				});
+          				//Add keyboard navigation
+
+				if(o.keynav){
+					$(document).keyup(function(e){
+
+						switch (e.which) {
+
+							case 39: case 32: //right arrow & space
+
+								clearTimeout(obj.play);
+
+								rotateSlider();
+
+								break;
+
+
+							case 37: // left arrow
+								clearTimeout(obj.play);
+								next = current - 1;
+								rotateSlider();
+
+								break;
+						}
+
+					});
+				} //end of keynav
+
         }); //end of return function 
         
       }//end popslider function options 
